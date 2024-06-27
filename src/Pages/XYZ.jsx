@@ -14,7 +14,10 @@ function Main() {
 
                 <Row>
 
-                    <Col sm="6">
+                    <Col sm="6"> 
+
+
+                    
 
                         <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                             <Form.Label column sm="2">
