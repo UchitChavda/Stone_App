@@ -5,6 +5,9 @@ import Sidebar from './Pages/Sidebar';
 import Topbar from './Pages/Topbar';
 import Main from './Pages/XYZ';
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import ViewTransporter from './Pages/ViewTransporter';
+import AddVehicle from './Pages/AddVehicle';
 
 function App() {
 
@@ -20,7 +23,14 @@ function App() {
             </Grid>
             <Grid item lg={10} md={10} sm={10} xs={10}>
               <Topbar />
-              <Main />
+              {/* <Main /> */}
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="/vtrns" element={<ViewTransporter />} />
+                  <Route path="/addvhcl" element={<AddVehicle />} />
+                </Routes>
+              </BrowserRouter>
             </Grid>
           </>
         )}
@@ -32,7 +42,14 @@ function App() {
             </Grid>
             <Grid item lg={11} md={11} sm={11} xs={11}>
               <Topbar />
-              <Main />
+              {/* <Main /> */}
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="/vtrns" element={<ViewTransporter />} />
+                  <Route path="/addvhcl" element={<AddVehicle />} />
+                </Routes>
+              </BrowserRouter>
             </Grid>
           </>
         )}
