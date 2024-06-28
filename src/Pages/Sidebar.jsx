@@ -25,17 +25,17 @@ function Sidebar({ isHovered, setIsHovered }) {
                 <nav>
                     <ul>
                         <li>
-                            {/* <Link to="/form">Form</Link> */}
-                            {/* <NavLink to="/form">Form</NavLink> */}
-                            <a href='/'> Form </a>
+                            <Link to="/">Form</Link>
+                            {/* <NavLink to="/">Form</NavLink> */}
+                            {/* <a href='/'> Form </a> */}
                         </li>
                         <li>
-                            {/* <Link to="/vtrns">View transporter</Link> */}
-                            <a href='/vtrns'> View transporter </a>
+                            <Link to="/vtrns">View transporter</Link>
+                            {/* <a href='/vtrns'> View transporter </a> */}
                         </li>
                         <li>
-                            {/* <Link to="/addvhcl">Add Vehicle</Link> */}
-                            <a href='/addvhcl'> Add Vehicle </a>
+                            <Link to="/addvhcl">Add Vehicle</Link>
+                            {/* <a href='/addvhcl'> Add Vehicle </a> */}
                         </li>
                     </ul>
                 </nav>
