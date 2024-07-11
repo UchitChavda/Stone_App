@@ -19,22 +19,25 @@ function Sidebar({ isHovered, setIsHovered }) {
                 onMouseEnter={handleclick1}
                 onMouseLeave={handleclick2}
                 style={{
-                    height: "98vh"
+                    height: "98vh",
+                    border: 'none'
                 }}>
                 <h3>sidebar</h3>
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/">Form</Link>
+                            {/* <div style={{position:'relative'}}> */}
+                                <Link to="/" className='stretched-link' >Form</Link>
+                            {/* </div> */}
                             {/* <NavLink to="/">Form</NavLink> */}
                             {/* <a href='/'> Form </a> */}
                         </li>
                         <li>
-                            <Link to="/vtrns">View transporter</Link>
+                            <Link to="/vtrns" className='stretched-link' >View transporter</Link>
                             {/* <a href='/vtrns'> View transporter </a> */}
                         </li>
                         <li>
-                            <Link to="/addvhcl">Add Vehicle</Link>
+                            <Link to="/addvhcl" className='stretched-link' >Add Vehicle</Link>
                             {/* <a href='/addvhcl'> Add Vehicle </a> */}
                         </li>
                     </ul>
