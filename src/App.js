@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ViewTransporter from './Pages/ViewTransporter';
 import AddVehicle from './Pages/AddVehicle';
+import MenuButton from './Pages/MenuButton';
+
 
 function App() {
 
@@ -17,13 +19,14 @@ function App() {
   return (
     <Router>
       <div>
-        <Grid container spacing={2} lg={12} md={12} sm={12} xs={12}>
+        <Grid container columnSpacing={2} lg={12} md={12} sm={12} xs={12}>
           {isHovered && (
             <>
               <Grid item lg={2} md={2} sm={2} xs={2}>
-                <Sidebar isHovered={isHovered} setIsHovered={setIsHovered} />
+                <Sidebar />
               </Grid>
               <Grid item lg={10} md={10} sm={10} xs={10}>
+                <MenuButton isHovered={isHovered} setIsHovered={setIsHovered} />
                 <Topbar />
                 <Routes>
                   <Route path="/" element={<Main />} />
@@ -36,10 +39,11 @@ function App() {
 
           {!isHovered && (
             <>
-              <Grid item lg={1} md={1} sm={1} xs={1}>
+              {/* <Grid item lg={1} md={0} sm={0} xs={0}>
                 <Sidebar isHovered={isHovered} setIsHovered={setIsHovered} />
-              </Grid>
-              <Grid item lg={11} md={11} sm={11} xs={11}>
+              </Grid> */}
+              <Grid item lg={12} md={12} sm={12} xs={12} style={{marginLeft: '16px', marginTop: '16px'}}>
+                <MenuButton isHovered={isHovered} setIsHovered={setIsHovered} />
                 <Topbar />
                 <Routes>
                   <Route path="/" element={<Main />} />

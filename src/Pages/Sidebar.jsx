@@ -16,8 +16,8 @@ function Sidebar({ isHovered, setIsHovered }) {
     return (
         <div>
             <Card
-                onMouseEnter={handleclick1}
-                onMouseLeave={handleclick2}
+                // onMouseEnter={handleclick1}
+                // onMouseLeave={handleclick2}
                 style={{
                     height: "98vh",
                     border: 'none'
