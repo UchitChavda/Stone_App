@@ -24,16 +24,17 @@ function Main() {
     const [kmReading, setKmReading] = useState('');
     const [remark, setRemark] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const formData = {
-           date,
+            formNo,
+            date,
             name,
             address,
             description,
             quantity,
             time,
-                formNo,
-         grossWeight,
+            grossWeight,
             tareWeight,
             netWeight,
             transport,
@@ -41,7 +42,7 @@ function Main() {
             kmReading,
             remark,
         };
-        console.log("Form Data Submitted: ",formData);
+        console.log("Form Data Submitted: ", formData);
     };
 
     return (
