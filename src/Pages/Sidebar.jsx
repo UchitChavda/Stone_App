@@ -3,6 +3,25 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 function Sidebar({ isHovered, setIsHovered }) {
+
+    const listItems = document.querySelectorAll('.hover-list li');
+
+    listItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            listItems.forEach(i => {
+                if (i !== item) {
+                    i.style.opacity = '0.5';
+                }
+            });
+        });
+
+        item.addEventListener('mouseleave', () => {
+            listItems.forEach(i => {
+                i.style.opacity = '1';
+            });
+        });
+    });
+
     return (
         <div>
             <Card
@@ -12,7 +31,7 @@ function Sidebar({ isHovered, setIsHovered }) {
                 }}>
                 <h3>sidebar</h3>
                 <nav>
-                    <ul>
+                    <ul className='hover-list'>
                         <li>
                             <i class="bi bi-receipt" style={{ marginRight: "10px", marginLeft: "10px" }}></i>
                             <Link to="/" className='stretched-link' >Form</Link>

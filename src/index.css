@@ -34,6 +34,19 @@ li {
   position: relative;
 }
 
-li:hover {
+/* li:hover {
   box-shadow: 0px 0px 5px 0px rgb(201, 201, 201);
+} */
+
+ul.hover-list li {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+ul.hover-list li:hover {
+  opacity: 1;
+}
+
+ul.hover-list li:not(:hover) {
+  opacity: 0.4;
 }

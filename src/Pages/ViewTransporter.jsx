@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Table from 'react-bootstrap/Table';
 
 function ViewTransporter() {
 
@@ -24,7 +25,18 @@ function ViewTransporter() {
     return (
         <div style={{ marginTop: "1.5rem" }}>
             <Card>
-                <Button variant="primary" onClick={handleShow}>
+                <Col sm='6'>
+                    <Card>
+                        <h6>Transportet Name</h6>
+                        <ul>
+                            <li>Vehicle No. </li>
+                            <li>Vehicle No. </li>
+                            <li>Vehicle No. </li>
+                        </ul>
+                    </Card>
+                </Col>
+
+                <Button variant="primary" style={{ width: "200px" }} onClick={handleShow}>
                     Add Vehicle
                 </Button>
 
@@ -44,12 +56,12 @@ function ViewTransporter() {
                                 Transporter
                             </Form.Label>
                             <Col sm="9">
-                            <Form.Select aria-label="Default select example">
-                                        <option>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </Form.Select>
+                                <Form.Select aria-label="Default select example">
+                                    <option>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </Form.Select>
                             </Col>
                         </Form.Group>
 
