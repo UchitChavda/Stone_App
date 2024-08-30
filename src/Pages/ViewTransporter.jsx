@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Table from 'react-bootstrap/Table';
 
@@ -25,18 +26,129 @@ function ViewTransporter() {
     return (
         <div style={{ marginTop: "1.5rem" }}>
             <Card>
-                <Col sm='6'>
-                    <Card>
-                        <h6>Transportet Name</h6>
-                        <ul>
-                            <li>Vehicle No. </li>
-                            <li>Vehicle No. </li>
-                            <li>Vehicle No. </li>
-                        </ul>
-                    </Card>
-                </Col>
-
-                <Button variant="primary" style={{ width: "200px" }} onClick={handleShow}>
+                <Card>
+                    <Container style={{ maxHeight: "500px", overflowY: 'scroll', overflowX: 'hidden' }}>
+                        <Row>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                            <Col sm='6'>
+                                <Card className='transCard'>
+                                    <h6>Transportet Name</h6>
+                                    <ul>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                        <li>Vehicle No. </li>
+                                    </ul>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Card>
+                <Button
+                    id='addVehBut'
+                    variant="primary"
+                    style={{
+                        width: "200px",
+                        justifySelf: 'center',
+                        alignSelf: 'center',
+                    }}
+                    onClick={handleShow}>
                     Add Vehicle
                 </Button>
 
