@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row';
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
 import "react-datepicker/dist/react-datepicker.css";
+import instance from './middleware';
+import FormControlContext from '@mui/material/FormControl/FormControlContext';
 
 function Main() {
 
@@ -25,25 +27,9 @@ function Main() {
     const [kmReading, setKmReading] = useState('');
     const [remark, setRemark] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = {
-            formNo,
-            date,
-            name,
-            address,
-            description,
-            quantity,
-            time,
-            grossWeight,
-            tareWeight,
-            netWeight,
-            transport,
-            vehicleNo,
-            kmReading,
-            remark,
-        };
-        console.log("Form Data Submitted: ", formData);
+    const handleSubmit = async () => {
+        const response = instance.post('/NewBill', `billnumber=${formNo}`);
+        console.log("Form Data Submitted: ", formNo, response);
     };
 
     return (
@@ -66,7 +52,7 @@ function Main() {
                                         type="text"
                                         placeholder="Form No."
                                         value={formNo}
-                                        onChange={(e) => setFormNo(e.target.value)}
+                                        onChange={(e) => setFormNo((e.target.value))}
                                     />
                                 </Col>
                                 <Form.Label column sm="2">
