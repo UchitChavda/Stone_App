@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import DatePicker from "react-datepicker";
 import Dropdown from 'react-bootstrap/Dropdown';
 import "react-datepicker/dist/react-datepicker.css";
-import instance from './middleware';
+import instance from '../middleware';
 import FormControlContext from '@mui/material/FormControl/FormControlContext';
 
 function Main() {
@@ -28,7 +28,7 @@ function Main() {
     const [remark, setRemark] = useState('');
 
     const handleSubmit = async () => {
-        const response = instance.post('/NewBill', `billnumber=${formNo}`);
+        const response = await instance.get('/');
         console.log("Form Data Submitted: ", formNo, response);
     };
 
