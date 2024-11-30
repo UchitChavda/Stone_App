@@ -12,37 +12,36 @@ import FormControlContext from '@mui/material/FormControl/FormControlContext';
 
 function Main() {
 
-    const [formNo, setFormNo] = useState('');
-    const [date, setDate] = useState(null);
-    const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [description, setDescription] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [time, setTime] = useState('');
-    const [grossWeight, setGrossWeight] = useState('');
-    const [tareWeight, setTareWeight] = useState('');
-    const [netWeight, setNetWeight] = useState('');
-    const [transport, setTransport] = useState('');
-    const [vehicleNo, setVehicleNo] = useState('');
-    const [kmReading, setKmReading] = useState('');
-    const [remark, setRemark] = useState('');
+    const [formNo, setFormNo] = useState('123');
+    const [date, setDate] = useState('123');
+    const [name, setName] = useState('123');
+    const [address, setAddress] = useState('123');
+    const [description, setDescription] = useState('123');
+    const [quantity, setQuantity] = useState('123');
+    const [time, setTime] = useState('123');
+    const [grossWeight, setGrossWeight] = useState('123');
+    const [tareWeight, setTareWeight] = useState('123');
+    const [netWeight, setNetWeight] = useState('123');
+    const [transport, setTransport] = useState('123');
+    const [vehicleNo, setVehicleNo] = useState('123');
+    const [kmReading, setKmReading] = useState('123');
+    const [remark, setRemark] = useState('123');
 
     const handleSubmit = async () => {
-        const response = await instance.get('/');
-        console.log("Form Data Submitted: ", formNo, response);
+        try {
+            const response = await instance.post('/NewBill',`billnumber=${formNo}&date=${date}&name=${name}&address=${address}&description=${description}&quantity=${quantity}&time=${time}&grossWeight=${grossWeight}&tareWeight=${tareWeight}&netWeight=${netWeight}&transport=${transport}&vehicleNo=${vehicleNo}&kmReading=${kmReading}&remark=${remark}`);              
+            console.log('Response:', response.data);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
         <div style={{ marginTop: "1.5rem" }}>
-
             <Card style={{ padding: "10px", backgroundColor: 'whitesmoke' }}>
-
                 <Form>
-
                     <Row>
-
                         <Col sm="6">
-
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                 <Form.Label column sm="2">
                                     Form No.
@@ -62,8 +61,6 @@ function Main() {
                                     <input type='date' placeholder='Select Date'></input>
                                 </Col>
                             </Form.Group>
-
-                            
 
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                 <Form.Label column sm="2">
@@ -122,9 +119,7 @@ function Main() {
                             </Form.Group>
 
                         </Col>
-
                         <Col sm="6">
-
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
                                 <Form.Label column sm='auto' >
                                     Gross Weight
@@ -148,7 +143,6 @@ function Main() {
                                         onChange={(e) => setTareWeight(e.target.value)}
                                     />
                                 </Col>
-                                
                             </Form.Group>
 
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
@@ -233,17 +227,12 @@ function Main() {
                             </Form.Group>
 
                         </Col>
-
                     </Row>
-
                     <center>
                         <Button variant="primary" onClick={handleSubmit}>Submit</Button>
                     </center>
-
                 </Form>
-
             </Card>
-
         </div>
     )
 }
