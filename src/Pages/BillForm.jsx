@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Form, Row, Col, Input, SelectPicker, Button, Panel, DatePicker } from 'rsuite';
 import "rsuite/dist/rsuite-no-reset.min.css";
 import instance from '../middleware';
+import './styles.css'
 
 function Main() {
 
@@ -88,17 +89,6 @@ function Main() {
     return (
         <div style={{ marginTop: "1.5rem" }}>
             <Panel bordered style={{ padding: "10px", backgroundColor: 'whitesmoke' }}>
-            <style>
-                {`
-                    .rs-picker-toggle-value {
-                    color: black !important;
-                    }
-                    .rs-picker-select-menu-item-active {
-                    color: black !important;
-                    background-color: whitesmoke !important;
-                    }
-                `}
-            </style>
                 <Form fluid>
                     <Row style={{ marginBottom: '1rem' }}>
                         <Col sm="18" md="6">
