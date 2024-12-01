@@ -15,6 +15,7 @@ function Main() {
     const [formNo, setFormNo] = useState('123');
     const [date, setDate] = useState('123');
     const [name, setName] = useState('123');
+    const [addressOptions, setAddressOptions] = useState([]);
     const [address, setAddress] = useState('123');
     const [description, setDescription] = useState('123');
     const [quantity, setQuantity] = useState('123');
@@ -22,15 +23,50 @@ function Main() {
     const [grossWeight, setGrossWeight] = useState('123');
     const [tareWeight, setTareWeight] = useState('123');
     const [netWeight, setNetWeight] = useState('123');
-    const [transport, setTransport] = useState('123');
-    const [vehicleNo, setVehicleNo] = useState('123');
+    const [transport, setTransport] = useState('');
+    const [vehicleOptions, setVehicleOptions] = useState([]);
+    const [vehicle, setVehicle] = useState('');
     const [kmReading, setKmReading] = useState('123');
     const [remark, setRemark] = useState('123');
 
+    const nameOptions = {
+        Bus: ['Bus-101', 'Bus-102', 'Bus-103'],
+        Train: ['Train-A1', 'Train-B2', 'Train-C3'],
+        Flight: ['Flight-X', 'Flight-Y', 'Flight-Z'],
+    };
+
+    const transportOptions = {
+        Bus: ['Bus-101', 'Bus-102', 'Bus-103'],
+        Train: ['Train-A1', 'Train-B2', 'Train-C3'],
+        Flight: ['Flight-X', 'Flight-Y', 'Flight-Z'],
+    };
+
+    const handleNameChange = (event) => {
+        const selectedValue = event.target.value;
+        setName(selectedValue);
+        setAddressOptions(nameOptions[selectedValue] || []);
+        setAddress('');
+    };
+
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value);
+    };
+
+    const handleTransportChange = (event) => {
+        const selectedValue = event.target.value;
+        setTransport(selectedValue);
+        setVehicleOptions(transportOptions[selectedValue] || []);
+        setVehicle('');
+    };
+
+    const handleVehicleChange = (event) => {
+        setVehicle(event.target.value);
+    };
+
     const handleSubmit = async () => {
         try {
-            const response = await instance.post('/NewBill',`billnumber=${formNo}&date=${date}&name=${name}&address=${address}&description=${description}&quantity=${quantity}&time=${time}&grossWeight=${grossWeight}&tareWeight=${tareWeight}&netWeight=${netWeight}&transport=${transport}&vehicleNo=${vehicleNo}&kmReading=${kmReading}&remark=${remark}`);              
-            console.log('Response:', response.data);
+            // const response = await instance.post('/NewBill', `billnumber=${formNo}&date=${date}&name=${name}&address=${address}&description=${description}&quantity=${quantity}&time=${time}&grossWeight=${grossWeight}&tareWeight=${tareWeight}&netWeight=${netWeight}&transport=${transport}&vehicleNo=${vehicleNo}&kmReading=${kmReading}&remark=${remark}`);
+            console.log('Response:');
         } catch (error) {
             console.error(error);
         }
@@ -67,12 +103,17 @@ function Main() {
                                     Name
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Name"
+                                    <Form.Select
+                                        aria-label="Name select"
                                         value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
+                                        onChange={handleNameChange}
+                                    >
+                                        {Object.keys(nameOptions).map((name) => (
+                                            <option key={name} value={name}>
+                                                {name}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
                                 </Col>
                             </Form.Group>
 
@@ -81,12 +122,18 @@ function Main() {
                                     Address
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Address"
+                                    <Form.Select
+                                        aria-label="Address select"
                                         value={address}
-                                        onChange={(e) => setAddress(e.target.value)}
-                                    />
+                                        onChange={handleAddressChange}
+                                        disabled={!addressOptions.length}
+                                    >
+                                        {addressOptions.map((address) => (
+                                            <option key={address} value={address}>
+                                                {address}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
                                 </Col>
                             </Form.Group>
 
@@ -175,28 +222,33 @@ function Main() {
                                     Transport
                                 </Form.Label>
                                 <Col sm="4">
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <Form.Select
+                                        aria-label="Transport select"
+                                        value={transport}
+                                        onChange={handleTransportChange}
+                                    >
+                                        {Object.keys(transportOptions).map((transport) => (
+                                            <option key={transport} value={transport}>
+                                                {transport}
+                                            </option>
+                                        ))}
                                     </Form.Select>
                                 </Col>
                                 <Form.Label column sm="2">
                                     Vehicle No.
                                 </Form.Label>
                                 <Col sm="4">
-                                    {/* <Form.Control
-                                        type="text"
-                                        placeholder="Vehicle No."
-                                        value={vehicleNo}
-                                        onChange={(e) => setVehicleNo(e.target.value)}
-                                    /> */}
-                                    <Form.Select aria-label="Default select example">
-                                        <option>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <Form.Select
+                                        aria-label="Vehicle select"
+                                        value={vehicle}
+                                        onChange={handleVehicleChange}
+                                        disabled={!vehicleOptions.length}
+                                    >
+                                        {vehicleOptions.map((vehicle) => (
+                                            <option key={vehicle} value={vehicle}>
+                                                {vehicle}
+                                            </option>
+                                        ))}
                                     </Form.Select>
                                 </Col>
                             </Form.Group>
