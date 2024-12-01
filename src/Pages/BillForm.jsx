@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Row, Col, Input, SelectPicker, Button, Panel, DatePicker } from 'rsuite';
-import "rsuite/dist/rsuite.css";
+import "rsuite/dist/rsuite-no-reset.min.css";
 import instance from '../middleware';
 
 function Main() {
@@ -88,6 +88,17 @@ function Main() {
     return (
         <div style={{ marginTop: "1.5rem" }}>
             <Panel bordered style={{ padding: "10px", backgroundColor: 'whitesmoke' }}>
+            <style>
+                {`
+                    .rs-picker-toggle-value {
+                    color: black !important;
+                    }
+                    .rs-picker-select-menu-item-active {
+                    color: black !important;
+                    background-color: whitesmoke !important;
+                    }
+                `}
+            </style>
                 <Form fluid>
                     <Row style={{ marginBottom: '1rem' }}>
                         <Col sm="18" md="6">
@@ -101,7 +112,7 @@ function Main() {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col sm="18" md="6"> 
+                        <Col sm="18" md="6">
                             <Form.Group>
                                 <Form.ControlLabel>Date</Form.ControlLabel>
                                 <DatePicker
@@ -130,7 +141,7 @@ function Main() {
                         </Col>
                         <Col sm="18" md="6">
                             <Form.Group>
-                            <Form.ControlLabel>Royalty Number</Form.ControlLabel>
+                                <Form.ControlLabel>Royalty Number</Form.ControlLabel>
                                 <Input
                                     type="number"
                                     value={royalty}
@@ -180,6 +191,7 @@ function Main() {
                                     value={description}
                                     onChange={(value) => setDescription(value)}
                                     block
+                                    color="#000000"
                                 />
                             </Form.Group>
                         </Col>
