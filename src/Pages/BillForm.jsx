@@ -4,30 +4,29 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
-import DatePicker from "react-datepicker";
+import { DatePicker } from 'rsuite';
+import "rsuite/dist/rsuite.css";
 import Dropdown from 'react-bootstrap/Dropdown';
-import "react-datepicker/dist/react-datepicker.css";
 import instance from '../middleware';
 import FormControlContext from '@mui/material/FormControl/FormControlContext';
 
 function Main() {
 
-    const [formNo, setFormNo] = useState('123');
+    const [formNo, setFormNo] = useState(null);
     const [date, setDate] = useState('123');
-    const [name, setName] = useState('123');
+    const [name, setName] = useState('');
     const [addressOptions, setAddressOptions] = useState([]);
-    const [address, setAddress] = useState('123');
-    const [description, setDescription] = useState('123');
-    const [quantity, setQuantity] = useState('123');
+    const [address, setAddress] = useState('');
+    const [description, setDescription] = useState('');
     const [time, setTime] = useState('123');
-    const [grossWeight, setGrossWeight] = useState('123');
-    const [tareWeight, setTareWeight] = useState('123');
-    const [netWeight, setNetWeight] = useState('123');
+    const [grossWeight, setGrossWeight] = useState(null);
+    const [tareWeight, setTareWeight] = useState(null);
+    const [quantity, setQuantity] = useState(null);
     const [transport, setTransport] = useState('');
     const [vehicleOptions, setVehicleOptions] = useState([]);
     const [vehicle, setVehicle] = useState('');
-    const [kmReading, setKmReading] = useState('123');
-    const [remark, setRemark] = useState('123');
+    const [kmReading, setKmReading] = useState(null);
+    const [remark, setRemark] = useState('');
 
     const nameOptions = {
         Bus: ['Bus-101', 'Bus-102', 'Bus-103'],
@@ -50,6 +49,16 @@ function Main() {
 
     const handleAddressChange = (event) => {
         setAddress(event.target.value);
+    };
+
+    const calculateNetWeight = () => {
+        if (grossWeight && tareWeight) {
+            if (grossWeight < tareWeight) {
+                return 0;
+            }
+            return grossWeight - tareWeight;
+        }
+        return "";
     };
 
     const handleTransportChange = (event) => {
@@ -84,17 +93,17 @@ function Main() {
                                 </Form.Label>
                                 <Col sm="4">
                                     <Form.Control
-                                        type="text"
+                                        type="number"
                                         placeholder="Form No."
                                         value={formNo}
-                                        onChange={(e) => setFormNo((e.target.value))}
+                                        readOnly
                                     />
                                 </Col>
                                 <Form.Label column sm="2">
                                     Date
                                 </Form.Label>
                                 <Col sm='4'>
-                                    <input type='date' placeholder='Select Date'></input>
+                                    <DatePicker format="MM/dd/yyyy" />
                                 </Col>
                             </Form.Group>
 
@@ -142,12 +151,15 @@ function Main() {
                                     Description
                                 </Form.Label>
                                 <Col sm="10">
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Description"
+                                    <Form.Select
+                                        aria-label="Thickness select"
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
-                                    />
+                                    >
+                                        <option value="1mm">1mm</option>
+                                        <option value="2mm">2mm</option>
+                                        <option value="3mm">3mm</option>
+                                    </Form.Select>
                                 </Col>
                             </Form.Group>
 
@@ -173,9 +185,10 @@ function Main() {
                                 </Form.Label>
                                 <Col>
                                     <Form.Control
-                                        type="text"
+                                        type="number"
                                         placeholder="Gross Weight"
                                         value={grossWeight}
+                                        min="0"
                                         onChange={(e) => setGrossWeight(e.target.value)}
                                     />
                                 </Col>
@@ -184,9 +197,10 @@ function Main() {
                                 </Form.Label>
                                 <Col >
                                     <Form.Control
-                                        type="text"
+                                        type="number"
                                         placeholder="Tare Weight"
                                         value={tareWeight}
+                                        min="0"
                                         onChange={(e) => setTareWeight(e.target.value)}
                                     />
                                 </Col>
@@ -198,10 +212,11 @@ function Main() {
                                 </Form.Label>
                                 <Col >
                                     <Form.Control
-                                        type="text"
+                                        type="number"
                                         placeholder="Net Weight"
-                                        value={netWeight}
-                                        onChange={(e) => setNetWeight(e.target.value)}
+                                        value={calculateNetWeight()}
+                                        min="0"
+                                        readOnly
                                     />
                                 </Col>
                                 <Form.Label column sm='2'>
@@ -209,9 +224,10 @@ function Main() {
                                 </Form.Label>
                                 <Col >
                                     <Form.Control
-                                        type="text"
-                                        placeholder="Number of"
+                                        type="number"
+                                        placeholder="Quantity"
                                         value={quantity}
+                                        min="0"
                                         onChange={(e) => setQuantity(e.target.value)}
                                     />
                                 </Col>
@@ -259,9 +275,10 @@ function Main() {
                                 </Form.Label>
                                 <Col >
                                     <Form.Control
-                                        type="text"
+                                        type="number"
                                         placeholder="Km. reading"
                                         value={kmReading}
+                                        min="0"
                                         onChange={(e) => setKmReading(e.target.value)}
                                     />
                                 </Col>
@@ -284,8 +301,8 @@ function Main() {
                         <Button variant="primary" onClick={handleSubmit}>Submit</Button>
                     </center>
                 </Form>
-            </Card>
-        </div>
+            </Card >
+        </div >
     )
 }
 
