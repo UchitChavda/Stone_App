@@ -61,7 +61,7 @@ function Main() {
             if (gross < tare) {
                 return 0;
             }
-            return gross - tare;
+            return parseFloat((gross - tare).toFixed(2));
         }
         return "";
     };
@@ -79,7 +79,6 @@ function Main() {
 
     const handleSubmit = async () => {
         try {
-            console.log(name);
             // const response = await instance.post('/NewBill', `billnumber=${formNo}&date=${date}&name=${name}&address=${address}&description=${description}&quantity=${quantity}&time=${time}&grossWeight=${grossWeight}&tareWeight=${tareWeight}&netWeight=${netWeight}&transport=${transport}&vehicleNo=${vehicleNo}&kmReading=${kmReading}&remark=${remark}`);
         } catch (error) {
             console.error(error);

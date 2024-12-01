@@ -4,5 +4,10 @@
 
 .rs-picker-select-menu-item-active {
     color: black !important;
-    background-color: whitesmoke !important;
+    background-color: transparent !important;
 }
+
+.rs-picker-select-menu-item:hover {
+    color: black;
+    background-color: whitesmoke !important;
+  }
