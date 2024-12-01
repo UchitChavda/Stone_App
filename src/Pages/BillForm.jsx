@@ -13,12 +13,12 @@ import FormControlContext from '@mui/material/FormControl/FormControlContext';
 function Main() {
 
     const [formNo, setFormNo] = useState(null);
-    const [date, setDate] = useState('123');
+    const [date, setDate] = useState(new Date());
     const [name, setName] = useState('');
     const [addressOptions, setAddressOptions] = useState([]);
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
-    const [time, setTime] = useState('123');
+    const [time, setTime] = useState(new Date());
     const [grossWeight, setGrossWeight] = useState(null);
     const [tareWeight, setTareWeight] = useState(null);
     const [quantity, setQuantity] = useState(null);
@@ -38,6 +38,14 @@ function Main() {
         Bus: ['Bus-101', 'Bus-102', 'Bus-103'],
         Train: ['Train-A1', 'Train-B2', 'Train-C3'],
         Flight: ['Flight-X', 'Flight-Y', 'Flight-Z'],
+    };
+
+    const handleDateChange = (value) => {
+        setDate(value);
+    };
+
+    const handleTimeChange = (value) => {
+        setTime(value);
     };
 
     const handleNameChange = (event) => {
@@ -103,7 +111,7 @@ function Main() {
                                     Date
                                 </Form.Label>
                                 <Col sm='4'>
-                                    <DatePicker format="MM/dd/yyyy" />
+                                    <DatePicker oneTap appearance="subtle" placeholder="Select Date" onChange={handleDateChange} format="dd/MM/yyyy" />
                                 </Col>
                             </Form.Group>
 
@@ -286,12 +294,7 @@ function Main() {
                                     Time
                                 </Form.Label>
                                 <Col s>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Time"
-                                        value={time}
-                                        onChange={(e) => setTime(e.target.value)}
-                                    />
+                                    <DatePicker appearance="subtle" showMeridiem placeholder="Select Time" onChange={handleTimeChange} format="hh:mm aa" />
                                 </Col>
                             </Form.Group>
 
