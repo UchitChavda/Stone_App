@@ -19,19 +19,20 @@ const Login = ({ setIsAuthenticated }) => {
             if (!formusername || !formPass) {
                 toaster.push(
                     <Message showIcon type="error" closable >
-                        Username or Password Missing.
+                        UserID or Password Missing.
                     </Message>,
                     { placement: 'topEnd', duration: 8000 }
                 );
                 return;
             }
             const formData = new FormData();
-            formData.append("username", formusername);
+            formData.append("phone", formusername);
             formData.append("password", formPass);
             const response = await instance.post(`/login`, formData);
             console.log(response.data)
             if (response.status === 200) {
                 setIsAuthenticated(true);
+                localStorage.setItem("token", "yes");
             }
         } catch (error) {
             setIsAuthenticated(false);
@@ -53,34 +54,32 @@ const Login = ({ setIsAuthenticated }) => {
             backgroundColor: '#f1f1f1',
         }}>
             <Panel bordered shaded style={{ width: '70%', padding: "1.5%", backgroundColor: 'white' }}>
-                <Col lg={9} md={9} sm={24} xs={24} style={{ height:"40vh", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Col lg={9} md={9} sm={24} xs={24} style={{ height: "40vh", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <img
                         src={Stone}
                         alt="IMG"
-                        style={{ width: '100%', height: 'auto'}}
+                        style={{ width: '100%', height: 'auto' }}
                     />
                 </Col>
 
 
                 <Col lg={1} md={1} smHidden xsHidden>
-                    <Divider vertical style={{ width: "0.1px", backgroundColor: 'black', height: '45vh'  }} />
+                    <Divider vertical style={{ width: "0.1px", backgroundColor: 'black', height: '45vh' }} />
                 </Col>
 
                 <Col lg={14} md={14} sm={24} xs={24}>
-                    <Text
+                    <h2
                         style={{
-                            fontSize: '26px',
-                            fontWeight: '600',
+                            fontSize: '150%',
                             textAlign: 'center',
                             marginBottom: '20px',
-                            color: '#333',
                         }}
                     >
                         Welcome
-                    </Text>
+                    </h2>
                     <Form fluid>
                         <Form.Group>
-                            <Form.ControlLabel>Username</Form.ControlLabel>
+                            <Form.ControlLabel>User ID</Form.ControlLabel>
                             <Input type="text" onChange={(value) => setFormName(value)} />
                         </Form.Group>
                         <Form.Group>

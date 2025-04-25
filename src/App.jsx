@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Grid, Col } from 'rsuite';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './Pages/Sidebar';
 import Main from './Pages/BillForm';
-import ViewTransporter from './Pages/Customer';
+import ViewCustomer from './Pages/Customer';
 import AddVehicle from './Pages/Transporter';
 import Login from './Pages/Login';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
 
   return (
     <Router>
@@ -19,7 +19,7 @@ function App() {
           </Col>
         )}
         <Col
-          style={{ padding: isAuthenticated ? '1%' : '0%' }}
+          style={{ padding: isAuthenticated ? '1%' : '0%', maxHeight: "100vh", overflowY: "scroll", }}
           xs={isAuthenticated ? 23 : 24}
           sm={isAuthenticated ? 23 : 24}
           md={isAuthenticated ? 23 : 24}
@@ -27,8 +27,9 @@ function App() {
         >
           <Routes>
             <Route path="/" element={isAuthenticated ? <Main /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path="/TransporterS" element={<ViewTransporter />} />
-            <Route path="/Vechiles" element={<AddVehicle />} />
+            <Route path="/Transporter"  />
+            <Route path="/Customers" element={<ViewCustomer />} />
+            <Route path="/*" element={ <Navigate to="/" />} />
           </Routes>
         </Col>
       </Grid>
