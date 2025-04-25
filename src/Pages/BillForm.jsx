@@ -5,7 +5,6 @@ import instance from '../middleware';
 import './styles.css'
 
 function Main() {
-
     const [formNo, setFormNo] = useState(null);
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
@@ -86,212 +85,209 @@ function Main() {
     };
 
     return (
-        <div style={{ marginTop: "1.5rem" }}>
-            <Panel bordered style={{ padding: "10px", backgroundColor: 'whitesmoke' }}>
-                <Form fluid>
-                    <Row style={{ marginBottom: '1rem' }}>
-                        <Col sm="18" md="6">
-                            <Form.Group>
-                                <Form.ControlLabel>Bill No.</Form.ControlLabel>
-                                <Input
-                                    type="number"
-                                    plaintext
-                                    value={formNo}
-                                    readOnly
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="18" md="6">
-                            <Form.Group>
-                                <Form.ControlLabel>Date</Form.ControlLabel>
-                                <DatePicker
-                                    format="dd/MM/yyyy"
-                                    block
-                                    appearance='subtle'
-                                    placeholder='Select Date'
-                                    onChange={handleDateChange}
-                                    value={date}
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="18" md="6">
-                            <Form.Group>
-                                <Form.ControlLabel>Time</Form.ControlLabel>
-                                <DatePicker
-                                    block
-                                    format="hh:mm aa"
-                                    showMeridiem
-                                    appearance='subtle'
-                                    placeholder='Select Time'
-                                    onChange={handleTimeChange}
-                                    value={time}
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="18" md="6">
-                            <Form.Group>
-                                <Form.ControlLabel>Royalty Number</Form.ControlLabel>
-                                <Input
-                                    type="number"
-                                    value={royalty}
-                                    min="0"
-                                    onChange={(value) => setRoyalty(value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+        <Panel style={{ padding: "0px" }}>
+            <Form>
+                <Row style={{ marginBottom: '1rem' }}>
+                    <Col sm="18" md="6">
+                        <Form.Group>
+                            <Form.ControlLabel>Bill No.</Form.ControlLabel>
+                            <Input
+                                type="number"
+                                plaintext
+                                value={formNo}
+                                readOnly
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="18" md="6">
+                        <Form.Group>
+                            <Form.ControlLabel>Date</Form.ControlLabel>
+                            <DatePicker
+                                format="dd/MM/yyyy"
+                                block
+                                appearance='subtle'
+                                placeholder='Select Date'
+                                onChange={handleDateChange}
+                                value={date}
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="18" md="6">
+                        <Form.Group>
+                            <Form.ControlLabel>Time</Form.ControlLabel>
+                            <DatePicker
+                                block
+                                format="hh:mm aa"
+                                showMeridiem
+                                appearance='subtle'
+                                placeholder='Select Time'
+                                onChange={handleTimeChange}
+                                value={time}
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="18" md="6">
+                        <Form.Group>
+                            <Form.ControlLabel>Royalty Number</Form.ControlLabel>
+                            <Input
+                                type="number"
+                                value={royalty}
+                                min="0"
+                                onChange={(value) => setRoyalty(value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                    <Row style={{ marginBottom: '1rem' }}>
-                        <Col sm="36" md="12">
-                            <Form.Group>
-                                <Form.ControlLabel>Name</Form.ControlLabel>
-                                <SelectPicker
-                                    data={Object.keys(nameOptions).map(name => ({ label: name, value: name }))}
-                                    value={name}
-                                    onChange={handleNameChange}
-                                    block
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="36" md="12">
-                            <Form.Group>
-                                <Form.ControlLabel>Address</Form.ControlLabel>
-                                <SelectPicker
-                                    data={addressOptions.map(address => ({ label: address, value: address }))}
-                                    value={address}
-                                    onChange={handleAddressChange}
-                                    disabled={!addressOptions.length}
-                                    block
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+                <Row style={{ marginBottom: '1rem' }}>
+                    <Col sm="36" md="12">
+                        <Form.Group>
+                            <Form.ControlLabel>Name</Form.ControlLabel>
+                            <SelectPicker
+                                data={Object.keys(nameOptions).map(name => ({ label: name, value: name }))}
+                                value={name}
+                                onChange={handleNameChange}
+                                block
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="36" md="12">
+                        <Form.Group>
+                            <Form.ControlLabel>Address</Form.ControlLabel>
+                            <SelectPicker
+                                data={addressOptions.map(address => ({ label: address, value: address }))}
+                                value={address}
+                                onChange={handleAddressChange}
+                                disabled={!addressOptions.length}
+                                block
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                    <Row style={{ marginBottom: '1rem' }}>
-                        <Col sm="36" md="24">
-                            <Form.Group>
-                                <Form.ControlLabel>Description</Form.ControlLabel>
-                                <SelectPicker
-                                    data={[
-                                        { label: "1mm", value: "1mm" },
-                                        { label: "2mm", value: "2mm" },
-                                        { label: "3mm", value: "3mm" }
-                                    ]}
-                                    value={description}
-                                    onChange={(value) => setDescription(value)}
-                                    block
-                                    color="#000000"
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+                <Row style={{ marginBottom: '1rem' }}>
+                    <Col sm="36" md="24">
+                        <Form.Group>
+                            <Form.ControlLabel>Description</Form.ControlLabel>
+                            <SelectPicker
+                                data={[
+                                    { label: "1mm", value: "1mm" },
+                                    { label: "2mm", value: "2mm" },
+                                    { label: "3mm", value: "3mm" }
+                                ]}
+                                value={description}
+                                onChange={(value) => setDescription(value)}
+                                block
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                    <Row style={{ marginBottom: '1rem' }}>
-                        <Col sm="24" md="8">
-                            <Form.Group>
-                                <Form.ControlLabel>Gross Weight</Form.ControlLabel>
-                                <Input
-                                    type="number"
-                                    value={grossWeight}
-                                    min="0"
-                                    onChange={(value) => setGrossWeight(value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="24" md="8">
-                            <Form.Group>
-                                <Form.ControlLabel>Tare Weight</Form.ControlLabel>
-                                <Input
-                                    type="number"
-                                    value={tareWeight}
-                                    min="0"
-                                    onChange={(value) => setTareWeight(value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="24" md="8">
-                            <Form.Group>
-                                <Form.ControlLabel>Net Weight</Form.ControlLabel>
-                                <Input
-                                    type="number"
-                                    value={calculateNetWeight()}
-                                    min="0"
-                                    readOnly
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+                <Row style={{ marginBottom: '1rem' }}>
+                    <Col sm="24" md="8">
+                        <Form.Group>
+                            <Form.ControlLabel>Gross Weight</Form.ControlLabel>
+                            <Input
+                                type="number"
+                                value={grossWeight}
+                                min="0"
+                                onChange={(value) => setGrossWeight(value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="24" md="8">
+                        <Form.Group>
+                            <Form.ControlLabel>Tare Weight</Form.ControlLabel>
+                            <Input
+                                type="number"
+                                value={tareWeight}
+                                min="0"
+                                onChange={(value) => setTareWeight(value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="24" md="8">
+                        <Form.Group>
+                            <Form.ControlLabel>Net Weight</Form.ControlLabel>
+                            <Input
+                                type="number"
+                                value={calculateNetWeight()}
+                                min="0"
+                                readOnly
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                    <Row style={{ marginBottom: '1rem' }}>
-                        <Col sm="36" md="12">
-                            <Form.Group>
-                                <Form.ControlLabel>Transport</Form.ControlLabel>
-                                <SelectPicker
-                                    data={Object.keys(transportOptions).map(transport => ({ label: transport, value: transport }))}
-                                    value={transport}
-                                    onChange={handleTransportChange}
-                                    block
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="36" md="12">
-                            <Form.Group>
-                                <Form.ControlLabel>Vehicle No.</Form.ControlLabel>
-                                <SelectPicker
-                                    data={vehicleOptions.map(vehicle => ({ label: vehicle, value: vehicle }))}
-                                    value={vehicle}
-                                    onChange={handleVehicleChange}
-                                    disabled={!vehicleOptions.length}
-                                    block
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+                <Row style={{ marginBottom: '1rem' }}>
+                    <Col sm="36" md="12">
+                        <Form.Group>
+                            <Form.ControlLabel>Transport</Form.ControlLabel>
+                            <SelectPicker
+                                data={Object.keys(transportOptions).map(transport => ({ label: transport, value: transport }))}
+                                value={transport}
+                                onChange={handleTransportChange}
+                                block
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="36" md="12">
+                        <Form.Group>
+                            <Form.ControlLabel>Vehicle No.</Form.ControlLabel>
+                            <SelectPicker
+                                data={vehicleOptions.map(vehicle => ({ label: vehicle, value: vehicle }))}
+                                value={vehicle}
+                                onChange={handleVehicleChange}
+                                disabled={!vehicleOptions.length}
+                                block
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                    <Row style={{ marginBottom: '1rem' }}>
-                        <Col sm="36" md="12">
-                            <Form.Group>
-                                <Form.ControlLabel>Quantity</Form.ControlLabel>
-                                <Input
-                                    type="number"
-                                    value={quantity}
-                                    min="0"
-                                    onChange={(value) => setQuantity(value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                        <Col sm="36" md="12">
-                            <Form.Group>
-                                <Form.ControlLabel>Km. reading</Form.ControlLabel>
-                                <Input
-                                    type="number"
-                                    value={kmReading}
-                                    min="0"
-                                    onChange={(value) => setKmReading(value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+                <Row style={{ marginBottom: '1rem' }}>
+                    <Col sm="36" md="12">
+                        <Form.Group>
+                            <Form.ControlLabel>Quantity</Form.ControlLabel>
+                            <Input
+                                type="number"
+                                value={quantity}
+                                min="0"
+                                onChange={(value) => setQuantity(value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col sm="36" md="12">
+                        <Form.Group>
+                            <Form.ControlLabel>Km. reading</Form.ControlLabel>
+                            <Input
+                                type="number"
+                                value={kmReading}
+                                min="0"
+                                onChange={(value) => setKmReading(value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                    <Row style={{ marginBottom: '1rem' }}>
-                        <Col sm="24">
-                            <Form.Group>
-                                <Form.ControlLabel>Remark</Form.ControlLabel>
-                                <Input
-                                    type="text"
-                                    value={remark}
-                                    onChange={(value) => setRemark(value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
+                <Row style={{ marginBottom: '1rem' }}>
+                    <Col sm="24">
+                        <Form.Group>
+                            <Form.ControlLabel>Remark</Form.ControlLabel>
+                            <Input
+                                type="text"
+                                value={remark}
+                                onChange={(value) => setRemark(value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-                    <div style={{ textAlign: 'center' }}>
-                        <Button appearance="primary" onClick={handleSubmit}>Submit</Button>
-                    </div>
-                </Form>
-            </Panel>
-        </div>
+                <div style={{ textAlign: 'center' }}>
+                    <Button appearance="primary" onClick={handleSubmit}>Submit</Button>
+                </div>
+            </Form>
+        </Panel>
     );
 }
 

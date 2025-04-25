@@ -1,53 +1,25 @@
-import Card from 'react-bootstrap/Card';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { Nav, Panel } from 'rsuite';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-function Sidebar({ isHovered, setIsHovered }) {
-
-    const listItems = document.querySelectorAll('.hover-list li');
-
-    listItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            listItems.forEach(i => {
-                if (i !== item) {
-                    i.style.opacity = '0.5';
-                }
-            });
-        });
-
-        item.addEventListener('mouseleave', () => {
-            listItems.forEach(i => {
-                i.style.opacity = '1';
-            });
-        });
-    });
+function Sidebar() {
+    const [active, setActive] = useState("1");
 
     return (
-        <div>
-            <Card
-                style={{
-                    height: "98vh",
-                    border: 'none'
-                }}>
-                <h3>sidebar</h3>
-                <nav>
-                    <ul className='hover-list'>
-                        <li>
-                            <i class="bi bi-receipt" style={{ marginRight: "10px", marginLeft: "10px" }}></i>
-                            <Link to="/" className='stretched-link' >Form</Link>
-                        </li>
-                        <li>
-                            <i class="bi bi-truck" style={{ marginRight: "10px", marginLeft: "10px" }}></i>
-                            <Link to="/vtrns" className='stretched-link' >Transporter</Link>
-                        </li>
-                        <li>
-                            <i class="bi bi-person-vcard" style={{ marginRight: "10px", marginLeft: "10px" }}></i>
-                            <Link to="/addvhcl" className='stretched-link' >Add Vehicle</Link>
-                        </li>
-                    </ul>
-                </nav>
-            </Card>
-        </div>
+        <Panel bodyFill style={{ borderRadius: "0px", height: "100vh", background: 'linear-gradient(45deg, #dfe9f3, #ffffff)' }}>
+            <Nav appearance="subtle" vertical active={active} onSelect={setActive} >
+                <Nav.Item as={Link} to="/" eventKey="1">
+                    <i className="bi bi-house-door"></i>
+                </Nav.Item>
+                <Nav.Item as={Link} to="/Customer" eventKey="2">
+                    <i class="bi bi-cart4"></i>
+                </Nav.Item>
+                <Nav.Item as={Link} to="/Vechiles" eventKey="3">
+                    <i class="bi bi-truck"></i>
+                </Nav.Item>
+            </Nav>
+        </Panel>
     )
 }
 
