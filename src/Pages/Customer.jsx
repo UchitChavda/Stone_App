@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Form,
     Input,
@@ -15,15 +15,111 @@ import {
 } from 'rsuite';
 import PlusIcon from '@rsuite/icons/Plus';
 import SearchIcon from '@rsuite/icons/Search';
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import instance from '../middleware';
 
-function ViewCustomer() {
+function ViewCustomer({ workplace }) {
+    const [rowData, setRowData] = useState([]);
     const [show, setShow] = useState(false);
+
+    const columnDefs = [
+        {
+            headerName: "Police Zone",
+            field: "station",
+            width: 160,
+            lockPosition: "left",
+            cellStyle: { fontWeight: '500' }
+        },
+        {
+            headerName: "Latitude",
+            lockPosition: "left",
+            width: 130,
+            field: "latitude",
+        },
+        {
+            headerName: "Longitude",
+            lockPosition: "left",
+            width: 130,
+            field: "longitude",
+        },
+        {
+            headerName: "Crime Category",
+            field: "crime",
+            width: 170,
+            lockPosition: "left",
+            cellStyle: { fontWeight: '500' }
+        },
+        {
+            headerName: "Possible Dates",
+            field: "day",
+            width: 150,
+            lockPosition: "left"
+        },
+        {
+            headerName: "Possible Crime Rate",
+            field: "crimerate",
+            width: 175,
+            lockPosition: "left",
+        },
+    ];
+
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleAdd = () => {
         setShow(false);
         alert("Vehicle Added Successfully")
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await instance.get(`/getCustomers/${workplace}`);
+                if (response.data && response.data.customer) {
+                    const tableData = response.data.customer.map((block, index) => {
+                        return {
+                            _id: block._id,
+                            // serial: index + 1,
+                            // accused: block.accused,
+                            // address: block.address,
+                            // crimeCategory: block.crime_category,
+                            // startdate: block.crime_start_date,
+                            // enddate: block.crime_end_date,
+                            // crimeNumber: `${block['crime_number']}/${block['Year']}`,
+                            // cc_number: block['Crime Case Number'] || "N/A",
+                            // chargesheetdate: block['Date of submission'] || "N/A",
+                            // duration: block.duration,
+                            // starttime: block.crime_start_time,
+                            // endtime: block.crime_end_time,
+                            // latitude: block.latitude,
+                            // longitude: block.longitude,
+                            // mobile: block.mobile_number,
+                            // officerusername: block.investigating_officer,
+                            // regdate: block.FIR_registration_date,
+                            // section: block.section,
+                            // station: block.Police_station,
+                            // status: block.Status,
+                            // officernames: block.officers_name,
+                            // deadline: block.Deadline,
+                            // username: block.username,
+                        }
+                    }
+                    );
+                    setRowData(tableData);
+                }
+            } catch (error) {
+                toaster.push(
+                    <Message showIcon type="error" closable>
+                        Error Fetching Data
+                    </Message>,
+                    { placement: "topCenter", duration: 8000 }
+                );
+            }
+        }
+        fetchData();
+    }, []);
 
     return (
         <Panel
@@ -47,9 +143,9 @@ function ViewCustomer() {
                     <Col lg={16} md={16} sm={12} xs={24}>
                         <InputGroup inside>
                             <Input
-                                placeholder="Search Customer..."
-                                // value={searchQuery}
-                                // onChange={setSearchQuery}
+                                placeholder="Search Customer"
+                            // value={searchQuery}
+                            // onChange={setSearchQuery}
                             />
                             <InputGroup.Addon>
                                 <SearchIcon />
@@ -69,179 +165,25 @@ function ViewCustomer() {
                     </Col>
                 </Col>
             </Row>
+
+            <Row
+                className="ag-theme-alpine"
+                style={{
+                    width: "100%",
+                    height: "calc(150vh - 150px)",
+                    marginTop: "2vh",
+                }}
+            >
+
+                <AgGridReact
+                    columnDefs={columnDefs}
+                    rowData={rowData}
+                    defaultColDef={{ sortable: false, resizable: true }}
+                    pagination={true}
+                    paginationPageSize={20}
+                />
+            </Row>
         </Panel>
-        // <div style={{ marginTop: "1.5rem" }}>
-        //     <Card>
-        //         <Card>
-        //             <Container style={{ maxHeight: "500px", overflowY: 'scroll', overflowX: 'hidden' }}>
-        //                 <Row>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                 </Row>
-        //                 <Row>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                 </Row>
-        //                 <Row>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                 </Row>
-        //                 <Row>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                 </Row>
-        //                 <Row>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                     <Col sm='6'>
-        //                         <Card className='transCard'>
-        //                             <h6>Transportet Name</h6>
-        //                             <ul>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                                 <li>Vehicle No. </li>
-        //                             </ul>
-        //                         </Card>
-        //                     </Col>
-        //                 </Row>
-        //             </Container>
-        //         </Card>
-        //         <Button
-        //             id='addVehBut'
-        //             variant="primary"
-        //             style={{
-        //                 width: "200px",
-        //                 justifySelf: 'center',
-        //                 alignSelf: 'center',
-        //             }}
-        //             onClick={handleShow}>
-        //             Add Vehicle
-        //         </Button>
-
-        //         <Modal
-        //             show={show}
-        //             onHide={handleClose}
-        //             backdrop="static"
-        //             keyboard={false}
-        //         >
-        //             <Modal.Header closeButton>
-        //                 <Modal.Title>Add Vehicle</Modal.Title>
-        //             </Modal.Header>
-        //             <Modal.Body>
-
-        //                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-        //                     <Form.Label column sm="3">
-        //                         Transporter
-        //                     </Form.Label>
-        //                     <Col sm="9">
-        //                         <Form.Select aria-label="Default select example">
-        //                             <option>Open this select menu</option>
-        //                             <option value="1">One</option>
-        //                             <option value="2">Two</option>
-        //                             <option value="3">Three</option>
-        //                         </Form.Select>
-        //                     </Col>
-        //                 </Form.Group>
-
-        //                 <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-        //                     <Form.Label column sm="3">
-        //                         Vehicle No.
-        //                     </Form.Label>
-        //                     <Col sm="9">
-        //                         <Form.Control type="text" placeholder="Vehicle No." />
-        //                     </Col>
-        //                 </Form.Group>
-
-        //             </Modal.Body>
-        //             <Modal.Footer>
-        //                 <Button variant="danger" onClick={handleClose}>
-        //                     Cancel
-        //                 </Button>
-        //                 <Button variant="primary" onClick={handleAdd}>Add</Button>
-        //             </Modal.Footer>
-        //         </Modal>
-        //     </Card>
-        // </div>
     )
 }
 

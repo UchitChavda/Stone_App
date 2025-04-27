@@ -13,10 +13,10 @@ function Sidebar() {
                     <i className="bi bi-house-door"></i>
                 </Nav.Item>
                 <Nav.Item as={Link} to="/Customers" eventKey="2">
-                    <i class="bi bi-cart4"></i>
+                    <i className="bi bi-cart4"></i>
                 </Nav.Item>
                 <Nav.Item as={Link} to="/Vechiles" eventKey="3">
-                    <i class="bi bi-truck"></i>
+                    <i className="bi bi-truck"></i>
                 </Nav.Item>
             </Nav>
         </Panel>

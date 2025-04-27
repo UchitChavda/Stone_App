@@ -31,8 +31,9 @@ const Login = ({ setIsAuthenticated }) => {
             const response = await instance.post(`/login`, formData);
             console.log(response.data)
             if (response.status === 200) {
+                sessionStorage.setItem("workplace", response.data.place);
+                sessionStorage.setItem("role", response.data.role);
                 setIsAuthenticated(true);
-                localStorage.setItem("token", "yes");
             }
         } catch (error) {
             setIsAuthenticated(false);

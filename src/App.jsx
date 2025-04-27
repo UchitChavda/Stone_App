@@ -8,7 +8,9 @@ import AddVehicle from './Pages/Transporter';
 import Login from './Pages/Login';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!sessionStorage.getItem("workplace"));
+  const workplace = sessionStorage.getItem("workplace");
+  const role = sessionStorage.getItem("role");
 
   return (
     <Router>
@@ -27,8 +29,8 @@ function App() {
         >
           <Routes>
             <Route path="/" element={isAuthenticated ? <Main /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
-            <Route path="/Transporter"  />
-            <Route path="/Customers" element={<ViewCustomer />} />
+            <Route path="/Transporters" element={isAuthenticated ? <ViewCustomer /> : <Navigate to="/" />} />
+            <Route path="/Customers" element={isAuthenticated ? <ViewCustomer  workplace={workplace} /> : <Navigate to="/" />} />
             <Route path="/*" element={ <Navigate to="/" />} />
           </Routes>
         </Col>
