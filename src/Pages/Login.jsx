@@ -29,7 +29,6 @@ const Login = ({ setIsAuthenticated }) => {
             formData.append("phone", formusername);
             formData.append("password", formPass);
             const response = await instance.post(`/login`, formData);
-            console.log(response.data)
             if (response.status === 200) {
                 sessionStorage.setItem("workplace", response.data.place);
                 sessionStorage.setItem("role", response.data.role);
